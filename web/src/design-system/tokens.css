@@ -1,0 +1,41 @@
+/*
+ * Design tokens — porte 1:1 das 22 variáveis do :root de style.css (legado, raiz).
+ * Fonte da verdade: style.css linhas 10-40. Não redefinir tokens fora daqui;
+ * qualquer variável nova entra neste arquivo, agrupada por categoria.
+ */
+:root {
+  /* Fundos e bordas */
+  --bg-deep: #050811;
+  --bg-dark: #080d1a;
+  --bg-card: rgba(10, 15, 30, 0.85);
+  --bg-glass: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 212, 255, 0.3);
+
+  /* Cores de destaque */
+  --cyan: #00d4ff;
+  --cyan-dim: rgba(0, 212, 255, 0.15);
+  --purple: #7b2ff7;
+  --purple-dim: rgba(123, 47, 247, 0.15);
+  --pink: #ff2d7a;
+  --orange: #ff6b00;
+  --green: #00ff88;
+  --gold: #ffd700;
+
+  /* Texto */
+  --text-1: #f0f4ff;
+  --text-2: #8892aa;
+  --text-3: #4a5568;
+
+  /* Tipografia */
+  --font-head: 'Orbitron', sans-serif;
+  --font-ui: 'Rajdhani', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Forma e movimento */
+  --radius: 12px;
+  --radius-lg: 20px;
+  --shadow-glow: 0 0 30px rgba(0, 212, 255, 0.2);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
