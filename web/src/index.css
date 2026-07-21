@@ -1,0 +1,31 @@
+/*
+ * Reset mínimo e neutro. Os design tokens reais (as 22 variáveis de style.css do
+ * legado) são portados 1:1 na Fase 1, junto com o design system. Não adicione
+ * tokens de cor/tipografia aqui — eles vêm no design-system/.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
