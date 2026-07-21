@@ -1,0 +1,56 @@
+# Configuração do git-cliff — gerador de changelog a partir de Conventional Commits.
+# Docs: https://git-cliff.org
+#
+# Uso típico (GitFlow):
+#   git cliff --unreleased --prepend CHANGELOG.md --tag vX.Y.Z   # ao fechar um release
+#   git cliff --unreleased                                        # pré-visualizar o próximo
+
+[changelog]
+# Cabeçalho fixo do arquivo.
+header = """
+# Changelog
+
+Todas as mudanças relevantes deste projeto são documentadas aqui.
+O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
+e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
+"""
+# Template de cada versão (Tera).
+body = """
+{% if version %}\
+## [{{ version | trim_start_matches(pat="v") }}] — {{ timestamp | date(format="%Y-%m-%d") }}
+{% else %}\
+## [Não lançado]
+{% endif %}\
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | upper_first }}
+{% for commit in commits %}
+- {% if commit.scope %}**{{ commit.scope }}:** {% endif %}{{ commit.message | upper_first }}\
+{% endfor %}
+{% endfor %}\n
+"""
+trim = true
+footer = ""
+
+[git]
+conventional_commits = true
+filter_unconventional = true
+split_commits = false
+# Mapeia (tipo/escopo) → seção do changelog. A ordem define a ordem das seções.
+commit_parsers = [
+  { message = "^feat", group = "<!-- 0 -->🚀 Funcionalidades" },
+  { message = "^fix", group = "<!-- 1 -->🐛 Correções" },
+  { message = "^refactor", group = "<!-- 2 -->♻️ Refatoração" },
+  { message = "^perf", group = "<!-- 3 -->⚡ Performance" },
+  { message = "^docs", group = "<!-- 4 -->📝 Documentação" },
+  { message = "^style", group = "<!-- 5 -->🎨 Estilo" },
+  { message = "^test", group = "<!-- 6 -->🧪 Testes" },
+  { message = "^build", group = "<!-- 7 -->📦 Build" },
+  { message = "^ci", group = "<!-- 8 -->👷 CI" },
+  { message = "^revert", group = "<!-- 9 -->◀️ Revertidos" },
+  { message = "^chore", skip = true },
+  { message = ".*", group = "<!-- 10 -->🔧 Outros" },
+]
+protect_breaking_commits = true
+filter_commits = false
+tag_pattern = "v[0-9]*"
+sort_commits = "oldest"
