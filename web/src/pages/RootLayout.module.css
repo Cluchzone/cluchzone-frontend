@@ -1,0 +1,5 @@
+.main {
+  /* Compensa a navbar fixa de 60px. */
+  padding-top: 60px;
+  min-height: 100vh;
+}
