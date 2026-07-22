@@ -1,0 +1,330 @@
+.lobby {
+  background: rgba(10, 13, 20, 0.97);
+  border: 1px solid rgba(223, 143, 38, 0.25);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 40px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+.header {
+  margin-bottom: 28px;
+}
+.header h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: #fff;
+  border-left: 4px solid var(--pubg-desert);
+  padding-left: 12px;
+}
+.header p {
+  font-size: 14px;
+  color: #718096;
+  margin-top: 4px;
+  padding-left: 16px;
+}
+.highlightTour {
+  color: var(--pubg-desert);
+  font-weight: 700;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 14px 22px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.countdownBox {
+  display: flex;
+  flex-direction: column;
+}
+.countdownTitle {
+  font-size: 10px;
+  font-weight: 700;
+  color: #a0aec0;
+  letter-spacing: 1px;
+}
+.countdownTimer {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--pubg-hazard);
+  text-shadow: 0 0 8px rgba(230, 92, 0, 0.5);
+}
+.statsBox {
+  display: flex;
+  flex-direction: column;
+}
+.statsBox strong {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--pubg-desert);
+  font-size: 20px;
+}
+.statusText {
+  font-size: 12px;
+  color: #48bb78;
+  animation: txtPulse 2s infinite alternate;
+}
+@keyframes txtPulse {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.airplaneCard {
+  background: rgba(15, 18, 28, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 24px 28px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #cbd5e0;
+}
+.legendDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.legendDot.confirmed {
+  background: var(--seat-confirmed);
+}
+.legendDot.pending {
+  background: var(--seat-pending);
+}
+.legendDot.available {
+  background: var(--seat-avail);
+  border-color: var(--seat-avail-bdr);
+}
+.legendDot.mine {
+  background: var(--seat-me);
+}
+
+.planeGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.planeGridHeader {
+  display: grid;
+  grid-template-columns: 30px 1fr 24px 1fr 30px;
+  align-items: center;
+  margin-bottom: 4px;
+  padding: 0 2px;
+}
+.colLabel {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  color: #4a5568;
+  letter-spacing: 1px;
+}
+.aisleLabel {
+  text-align: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: #4a5568;
+  letter-spacing: 1px;
+}
+
+.planeRow {
+  display: grid;
+  grid-template-columns: 30px 1fr 24px 1fr 30px;
+  align-items: center;
+  gap: 0;
+}
+.planeRowNum {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: #4a5568;
+}
+.seatPair {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.seat {
+  width: 38px;
+  height: 34px;
+  border-radius: 5px;
+  border: 1px solid var(--seat-avail-bdr);
+  background: var(--seat-avail);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #718096;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  position: relative;
+}
+.seat.available:hover {
+  transform: scale(1.15) translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 212, 255, 0.35);
+  border-color: #00d4ff;
+  color: #00d4ff;
+  z-index: 10;
+}
+.seat.confirmed {
+  background: rgba(79, 142, 247, 0.2);
+  border-color: var(--seat-confirmed);
+  color: var(--seat-confirmed);
+  cursor: not-allowed;
+}
+.seat.pending {
+  background: rgba(245, 166, 35, 0.2);
+  border-color: var(--seat-pending);
+  color: var(--seat-pending);
+  cursor: not-allowed;
+}
+.seat.mine {
+  background: rgba(0, 230, 118, 0.25);
+  border-color: var(--seat-me);
+  color: var(--seat-me);
+  animation: mineGlow 1s infinite alternate;
+  cursor: default;
+}
+@keyframes mineGlow {
+  0% {
+    box-shadow: 0 0 6px var(--seat-me);
+  }
+  100% {
+    box-shadow: 0 0 18px var(--seat-me);
+  }
+}
+
+.aisleDivider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aisleDivider::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+.summaryItem {
+  background: rgba(15, 18, 28, 0.98);
+  padding: 14px;
+  text-align: center;
+}
+.summaryNum {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+.summaryNum.confirmed {
+  color: var(--seat-confirmed);
+}
+.summaryNum.pending {
+  color: var(--seat-pending);
+}
+.summaryNum.available {
+  color: #4a5568;
+}
+.summaryLabel {
+  font-size: 11px;
+  color: #718096;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.tooltip {
+  position: fixed;
+  background: rgba(7, 9, 13, 0.96);
+  border: 1px solid var(--pubg-desert);
+  border-radius: 8px;
+  padding: 12px 16px;
+  z-index: 2000;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  min-width: 180px;
+  backdrop-filter: blur(8px);
+}
+.tooltipHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 6px;
+}
+.tooltipAvatar {
+  font-size: 18px;
+}
+.tooltipNick {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+.tooltipRank {
+  font-size: 10px;
+  color: var(--pubg-desert);
+}
+.tooltipStats {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  color: #a0aec0;
+}
+.tStat {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.greenText {
+  color: #48bb78;
+}
+
+@media (max-width: 900px) {
+  .seat {
+    width: 32px;
+    height: 30px;
+    font-size: 9px;
+  }
+}
