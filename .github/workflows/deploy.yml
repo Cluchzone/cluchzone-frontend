@@ -64,20 +64,13 @@ jobs:
           cp web/dist/favicon.svg site/favicon.svg
           cp web/dist/index.html site/404.html
 
-          # 4) Páginas já migradas (Fase 3/4): a navbar de TODAS as páginas legadas
-          #    aponta para pubg.html/brawlstars.html. Sobrescrevemos por stubs que
-          #    encaminham para as rotas React, virando os usuários reais para o novo
-          #    frontend. Rollback = remover este passo (ver MIGRATION.md).
-          for route in pubg brawlstars; do
-            {
-              echo '<!doctype html>'
-              echo '<html lang="pt-BR"><head><meta charset="utf-8">'
-              echo "<meta http-equiv=\"refresh\" content=\"0; url=${BASE_PATH}/${route}\">"
-              echo "<link rel=\"canonical\" href=\"${BASE_PATH}/${route}\">"
-              echo "<script>location.replace('${BASE_PATH}/${route}' + location.search + location.hash)</script>"
-              echo "</head><body>Redirecionando para o novo /${route}...</body></html>"
-            } > "site/${route}.html"
-          done
+          # 4) Páginas já migradas (Fase 3/4): REMOVER os .html legados do publish.
+          #    O Pages resolve /pubg para o arquivo pubg.html se ele existir (pretty
+          #    URL), ofuscando a rota React e o fallback SPA. Sem o arquivo, tanto
+          #    /pubg quanto /pubg.html caem no 404 → 404.html (SPA) → o Router
+          #    renderiza (e pubg.html redireciona para /pubg). A navbar legada, que
+          #    aponta para esses .html, passa a cair no React. Ver MIGRATION.md.
+          rm -f site/pubg.html site/brawlstars.html
 
           touch site/.nojekyll
 
