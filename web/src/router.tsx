@@ -1,9 +1,11 @@
 import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom'
 import { BrawlStarsPage } from '@/pages/BrawlStarsPage'
 import { HomePage } from '@/pages/HomePage'
+import { MyTeamsPage } from '@/pages/MyTeamsPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 import { PubgPage } from '@/pages/PubgPage'
 import { RootLayout } from '@/pages/RootLayout'
+import { TeamCreatePage } from '@/pages/TeamCreatePage'
 import { GalleryPage } from '@/pages/dev/GalleryPage'
 
 /**
@@ -19,6 +21,8 @@ const routes: RouteObject[] = [
       { index: true, element: <HomePage /> },
       { path: 'brawlstars', element: <BrawlStarsPage /> },
       { path: 'pubg', element: <PubgPage /> },
+      { path: 'teams', element: <MyTeamsPage /> },
+      { path: 'teams/new', element: <TeamCreatePage /> },
       // A navbar de TODAS as páginas legadas linka para pubg.html/brawlstars.html.
       // No GitHub Pages esses caminhos caem no 404 → 404.html (SPA), pois os
       // arquivos .html não são publicados (ver deploy.yml). Aqui redirecionamos

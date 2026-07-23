@@ -1,0 +1,201 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px;
+  font-family: var(--font-ui);
+  color: var(--text-1);
+}
+
+.gate {
+  max-width: 480px;
+  margin: 15vh auto 0;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.gateBadge {
+  display: inline-block;
+  margin: 0 0 20px;
+  padding: 4px 12px;
+  border: 1px solid var(--cyan);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--cyan);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gateTitle {
+  margin: 0 0 24px;
+  font-size: 28px;
+  line-height: 1.2;
+  font-family: var(--font-head);
+}
+
+.selectorRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.selectorLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.selector {
+  width: 260px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text-1);
+  font-family: var(--font-ui);
+  font-size: 14px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-3);
+  padding: 60px 0;
+  font-size: 14px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 28px;
+}
+
+.header {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.06) 0%, var(--bg-card) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.headerNameRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.headerName {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0;
+  color: #fff;
+}
+
+.headerTag {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-glow);
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.headerMeta {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 8px 0 0;
+}
+
+.headerDesc {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 10px 0 0;
+  line-height: 1.5;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.cardTitle {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.roster {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rosterItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.rosterNick {
+  font-weight: 700;
+  color: #fff;
+  font-size: 15px;
+}
+
+.badge {
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.badgeCaptain {
+  background: rgba(255, 215, 0, 0.12);
+  color: var(--gold);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.badgeVice {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border: 1px solid var(--border-glow);
+}
+
+.badgePlayer {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e0;
+}
+
+.badgeReserve {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-3);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
