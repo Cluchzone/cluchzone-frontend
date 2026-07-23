@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: 'CS2', to: '/csgo' },
   { label: 'Brawl Stars', to: '/brawlstars' },
   { label: '🛂 Passaporte', to: '/passport' },
+  { label: '👥 Equipes', to: '/teams' },
 ]
 
 function Avatar({ url, name }: { url: string | null; name: string }) {
