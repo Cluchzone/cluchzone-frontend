@@ -1,4 +1,4 @@
-import { createBrowserRouter, type RouteObject } from 'react-router-dom'
+import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom'
 import { BrawlStarsPage } from '@/pages/BrawlStarsPage'
 import { HomePage } from '@/pages/HomePage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
@@ -19,6 +19,12 @@ const routes: RouteObject[] = [
       { index: true, element: <HomePage /> },
       { path: 'brawlstars', element: <BrawlStarsPage /> },
       { path: 'pubg', element: <PubgPage /> },
+      // A navbar de TODAS as páginas legadas linka para pubg.html/brawlstars.html.
+      // No GitHub Pages esses caminhos caem no 404 → 404.html (SPA), pois os
+      // arquivos .html não são publicados (ver deploy.yml). Aqui redirecionamos
+      // para a URL limpa da rota React (client-side, sem round-trip no Pages).
+      { path: 'pubg.html', element: <Navigate to="/pubg" replace /> },
+      { path: 'brawlstars.html', element: <Navigate to="/brawlstars" replace /> },
       // Galeria só em dev (import.meta.env.DEV é false em produção → tree-shaken).
       ...(import.meta.env.DEV ? [{ path: 'dev/gallery', element: <GalleryPage /> }] : []),
       // Rotas ainda não migradas caem no placeholder "Em migração".
