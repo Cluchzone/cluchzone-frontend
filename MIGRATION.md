@@ -27,14 +27,22 @@ O `deploy.yml` monta o diretório `site/` assim:
    `web/dist/index.html` → **`site/404.html`** (fallback SPA do Pages). Uma rota
    como `/cluchzone-frontend/pubg` não é arquivo → o Pages serve `404.html` →
    o React Router (com `basename=/cluchzone-frontend`) renderiza a página.
-4. Sobrescreve `pubg.html` e `brawlstars.html` por **stubs de redirect** para
-   `/cluchzone-frontend/pubg` e `/brawlstars` — porque a navbar de todas as
-   páginas legadas aponta para esses `.html`. É isso que vira o usuário real
-   para o React.
+4. **Remove** `pubg.html` e `brawlstars.html` do publish. Isso é essencial: o
+   Pages resolve `/pubg` para o arquivo `pubg.html` se ele existir (pretty URL),
+   o que ofuscaria a rota React e o fallback SPA. Sem o arquivo, tanto `/pubg`
+   quanto `/pubg.html` caem no 404 → `404.html` (SPA). A navbar de todas as
+   páginas legadas aponta para `pubg.html`/`brawlstars.html`; esses caminhos
+   agora caem no SPA, e o React Router redireciona `pubg.html` → `/pubg`
+   (client-side). É isso que vira o usuário real para o React.
 
 O `index.html` legado (home) **não** é tocado — continua sendo a home até a
 Fase 10. Todas as demais páginas legadas (`csgo.html`, `teams.html`, etc.) são
 servidas byte a byte iguais.
+
+> Nota histórica: a v2.1.0 tentou o passo 4 com **stubs de redirect** (arquivos
+> `pubg.html` que redirecionavam para `/pubg`). Isso causou loop infinito, porque
+> o Pages servia o próprio stub em `/pubg` (pretty URL) e o stub reapontava para
+> `/pubg`. Corrigido na v2.1.1 removendo os arquivos.
 
 ## Páginas já em produção no React
 
@@ -55,8 +63,9 @@ reverter é seguro e instantâneo:
   O próximo push em `main` republica o site sem o React e com os
   `pubg.html`/`brawlstars.html` legados originais.
 - **Rollback parcial (mantém o React acessível, mas para de virar usuários):**
-  remover só o passo 4 (stubs). As rotas React seguem acessíveis por URL direta,
-  mas a navbar legada volta a servir os `.html` legados.
+  remover só o passo 4 (o `rm` dos `.html`). Os `.html` legados voltam ao publish
+  e a navbar legada volta a servi-los; as rotas React só ficam acessíveis por URL
+  direta que não colida com um `.html` legado.
 
 Como o legado nunca é removido do publish nesta fase, o rollback não depende de
 restaurar arquivos apagados — só de reverter o workflow.
