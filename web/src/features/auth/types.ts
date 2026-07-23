@@ -12,6 +12,15 @@ export type AuthUser = {
   avatarUrl: string | null
   profileUrl: string | null
   role: AuthRole
+  /** Campos Steam-autoritativos (PublicUser no backend) — usados no Passaporte (Fase 9). */
+  steamId64: string
+  steamLevel: number | null
+  visibilityState: number | null
+  personaState: number | null
+  countryCode: string | null
+  stateCode: string | null
+  steamCreatedAt: string | null
+  lastLogoffAt: string | null
 }
 
 /**
@@ -22,7 +31,7 @@ export type AuthUser = {
  */
 export type AuthState = 'loading' | 'authenticated' | 'anonymous' | 'unavailable'
 
-/** Formato bruto de /auth/me: `{ ok, user }` (ver clutchzone-backend auth.router.ts). */
+/** Formato bruto de /auth/me: `{ ok, user }` (ver clutchzone-backend auth.router.ts — retorna o PublicUser inteiro). */
 export type BackendMeResponse = {
   ok: boolean
   user: {
@@ -32,5 +41,13 @@ export type BackendMeResponse = {
     profileUrl: string | null
     role: string
     status: string
+    steamId64: string
+    steamLevel: number | null
+    visibilityState: number | null
+    personaState: number | null
+    countryCode: string | null
+    stateCode: string | null
+    steamCreatedAt: string | null
+    lastLogoffAt: string | null
   }
 }

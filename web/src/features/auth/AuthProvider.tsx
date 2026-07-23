@@ -16,6 +16,14 @@ function normalizeUser(user: BackendMeResponse['user']): AuthUser {
     avatarUrl: user.avatarUrl,
     profileUrl: user.profileUrl,
     role: normalizeRole(user.role),
+    steamId64: user.steamId64,
+    steamLevel: user.steamLevel,
+    visibilityState: user.visibilityState,
+    personaState: user.personaState,
+    countryCode: user.countryCode,
+    stateCode: user.stateCode,
+    steamCreatedAt: user.steamCreatedAt,
+    lastLogoffAt: user.lastLogoffAt,
   }
 }
 
