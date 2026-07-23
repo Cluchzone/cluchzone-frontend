@@ -2,6 +2,7 @@ import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { BrawlStarsPage } from '@/pages/BrawlStarsPage'
 import { HomePage } from '@/pages/HomePage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
+import { PubgPage } from '@/pages/PubgPage'
 import { RootLayout } from '@/pages/RootLayout'
 import { GalleryPage } from '@/pages/dev/GalleryPage'
 
@@ -17,6 +18,7 @@ const routes: RouteObject[] = [
     children: [
       { index: true, element: <HomePage /> },
       { path: 'brawlstars', element: <BrawlStarsPage /> },
+      { path: 'pubg', element: <PubgPage /> },
       // Galeria só em dev (import.meta.env.DEV é false em produção → tree-shaken).
       ...(import.meta.env.DEV ? [{ path: 'dev/gallery', element: <GalleryPage /> }] : []),
       // Rotas ainda não migradas caem no placeholder "Em migração".

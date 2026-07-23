@@ -3,10 +3,12 @@ import styles from './GameSignatureKit.module.css'
 type SignatureSlot = { kind: string; code: string; label: string }
 
 /**
- * Só 'brawl' está implementado (Fase 3). 'pubg'/'cs2' entram nas fases 4/11,
- * junto com a hidratação de destaques Steam que o legado só faz para esses dois.
+ * 'cs2' entra na Fase 11. No legado, cs2/pubg também hidratam destaques Steam
+ * reais (window.ClutchInventory) por cima do fallback estático — isso depende
+ * da feature inventory/, ainda não portada, então por ora pubg mostra sempre
+ * o kit estático, como o brawl já mostra.
  */
-export type GameKey = 'brawl'
+export type GameKey = 'brawl' | 'pubg'
 
 const KITS: Record<GameKey, { eyebrow: string; title: string; note: string; action: string; slots: SignatureSlot[] }> = {
   brawl: {
@@ -21,10 +23,23 @@ const KITS: Record<GameKey, { eyebrow: string; title: string; note: string; acti
       { kind: 'team', code: '3V3', label: 'Equipe completa' },
     ],
   },
+  pubg: {
+    eyebrow: 'SURVIVAL KIT',
+    title: 'PRONTO PARA O DROP',
+    note: 'Loot, proteção e cobertura para sobreviver até o círculo final.',
+    action: 'ESCOLHER CAMPEONATO',
+    slots: [
+      { kind: 'crate', code: 'DROP', label: 'Airdrop' },
+      { kind: 'helmet', code: 'LV.3', label: 'Capacete nível 3' },
+      { kind: 'smoke', code: 'SMK', label: 'Granada de fumaça' },
+      { kind: 'boost', code: '+40', label: 'Boost de energia' },
+    ],
+  },
 }
 
 const THEME_CLASS: Record<GameKey, string> = {
   brawl: styles.isBrawl,
+  pubg: styles.isPubg,
 }
 
 type GameSignatureKitProps = {
