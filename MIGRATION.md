@@ -27,13 +27,16 @@ O `deploy.yml` monta o diretório `site/` assim:
    `web/dist/index.html` → **`site/404.html`** (fallback SPA do Pages). Uma rota
    como `/cluchzone-frontend/pubg` não é arquivo → o Pages serve `404.html` →
    o React Router (com `basename=/cluchzone-frontend`) renderiza a página.
-4. **Remove** `pubg.html` e `brawlstars.html` do publish. Isso é essencial: o
-   Pages resolve `/pubg` para o arquivo `pubg.html` se ele existir (pretty URL),
-   o que ofuscaria a rota React e o fallback SPA. Sem o arquivo, tanto `/pubg`
-   quanto `/pubg.html` caem no 404 → `404.html` (SPA). A navbar de todas as
-   páginas legadas aponta para `pubg.html`/`brawlstars.html`; esses caminhos
-   agora caem no SPA, e o React Router redireciona `pubg.html` → `/pubg`
-   (client-side). É isso que vira o usuário real para o React.
+4. **Remove** do publish o `.html` de cada página cujo slug colide com a rota
+   React (`pubg.html`, `brawlstars.html`, `marketplace.html`, `seller-erp.html`).
+   Isso é essencial: o Pages resolve `/pubg` para o arquivo `pubg.html` se ele
+   existir (pretty URL), o que ofuscaria a rota React e o fallback SPA. Sem o
+   arquivo, tanto `/pubg` quanto `/pubg.html` caem no 404 → `404.html` (SPA). A
+   navbar/links legados apontam para esses `.html`; esses caminhos agora caem
+   no SPA, e o React Router redireciona `<slug>.html` → `/<slug>` (client-side).
+   É isso que vira o usuário real para o React. Páginas cujo `.html` legado não
+   colide com o slug da rota nova (ex.: `my-teams.html` → `/teams`) não
+   precisam desse passo — o legado e o React convivem sem conflito de URL.
 
 O `index.html` legado (home) **não** é tocado — continua sendo a home até a
 Fase 10. Todas as demais páginas legadas (`csgo.html`, `teams.html`, etc.) são
@@ -48,8 +51,11 @@ servidas byte a byte iguais.
 
 | Rota | Fase | Legado correspondente |
 |---|---|---|
-| `/brawlstars` | 3 | `brawlstars.html` (agora stub de redirect) |
-| `/pubg` | 4 | `pubg.html` (agora stub de redirect) |
+| `/brawlstars` | 3 | `brawlstars.html` (removido do publish; redireciona) |
+| `/pubg` | 4 | `pubg.html` (removido do publish; redireciona) |
+| `/teams`, `/teams/new` | 6 | `my-teams.html`, `team-create.html` (nomes não colidem com a rota — legado continua publicado, sem conflito de pretty URL) |
+| `/marketplace` | 7 | `marketplace.html` (removido do publish; redireciona) |
+| `/seller-erp` | 7 | `seller-erp.html` (removido do publish; redireciona) |
 
 Todo o resto continua servido pelo legado.
 
@@ -60,8 +66,9 @@ reverter é seguro e instantâneo:
 
 - **Rollback total (volta a 100% legado):** reverter o commit que alterou o
   `.github/workflows/deploy.yml` (voltando à versão que só publica o legado).
-  O próximo push em `main` republica o site sem o React e com os
-  `pubg.html`/`brawlstars.html` legados originais.
+  O próximo push em `main` republica o site sem o React e com todos os
+  `.html` legados originais (`pubg.html`, `brawlstars.html`, `marketplace.html`,
+  `seller-erp.html`).
 - **Rollback parcial (mantém o React acessível, mas para de virar usuários):**
   remover só o passo 4 (o `rm` dos `.html`). Os `.html` legados voltam ao publish
   e a navbar legada volta a servi-los; as rotas React só ficam acessíveis por URL
