@@ -25,13 +25,60 @@ jobs:
       - name: Baixar código atualizado
         uses: actions/checkout@v4
 
+      # A partir da Fase 5, o app React (web/) é publicado junto do legado no
+      # mesmo GitHub Pages. Ver MIGRATION.md para a arquitetura e o rollback.
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Buildar app React (web/)
+        working-directory: web
+        # base = subpath do project Pages, para os assets resolverem em
+        # /cluchzone-frontend/assets/* mesmo quando o index é servido como 404.html.
+        run: |
+          npm ci
+          npm run build -- --base=/cluchzone-frontend/
+
       - name: Preparar versão pública
+        env:
+          BASE_PATH: /cluchzone-frontend
         run: |
           mkdir -p site
+
+          # 1) Legado: html/css/js da raiz + imagens (inalterado desde a Fase 0).
           find . -maxdepth 1 -type f \( -name '*.html' -o -name '*.css' -o -name '*.js' \) -exec cp {} site/ \;
           cp -R images site/images
+
+          # 2) Cache-bust dos refs do legado. Roda ANTES de dobrar o React,
+          #    cujos assets já têm hash de conteúdo no nome.
           VERSION="${GITHUB_SHA::12}"
           find site -name '*.html' -exec sed -i -E "s#((src|href)=\"[^\"]+\.(js|css))(\?v=[^\"]*)?\"#\1?v=${VERSION}\"#g" {} +
+
+          # 3) React: assets + favicon; o index vira 404.html (fallback SPA do Pages).
+          #    /cluchzone-frontend/pubg não é arquivo → 404 → 404.html = SPA → Router
+          #    renderiza a rota. O index.html legado (home) não é tocado.
+          cp -R web/dist/assets site/assets
+          cp web/dist/favicon.svg site/favicon.svg
+          cp web/dist/index.html site/404.html
+
+          # 4) Páginas já migradas (Fase 3/4): a navbar de TODAS as páginas legadas
+          #    aponta para pubg.html/brawlstars.html. Sobrescrevemos por stubs que
+          #    encaminham para as rotas React, virando os usuários reais para o novo
+          #    frontend. Rollback = remover este passo (ver MIGRATION.md).
+          for route in pubg brawlstars; do
+            {
+              echo '<!doctype html>'
+              echo '<html lang="pt-BR"><head><meta charset="utf-8">'
+              echo "<meta http-equiv=\"refresh\" content=\"0; url=${BASE_PATH}/${route}\">"
+              echo "<link rel=\"canonical\" href=\"${BASE_PATH}/${route}\">"
+              echo "<script>location.replace('${BASE_PATH}/${route}' + location.search + location.hash)</script>"
+              echo "</head><body>Redirecionando para o novo /${route}...</body></html>"
+            } > "site/${route}.html"
+          done
+
           touch site/.nojekyll
 
       - name: Empacotar site para o Pages
