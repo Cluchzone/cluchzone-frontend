@@ -7,6 +7,19 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 As entradas a partir da versão 2.0.0 passam a ser geradas automaticamente pelo
 [git-cliff](https://git-cliff.org) a partir de [Conventional Commits](https://www.conventionalcommits.org/pt-br/).
 
+## [2.1.1] — 2026-07-23
+
+Corrige um loop infinito de redirecionamento em `/pubg` e `/brawlstars`
+introduzido no corte da v2.1.0. Os stubs `pubg.html`/`brawlstars.html` eram
+servidos pelo próprio Pages em `/pubg` (pretty URL) e reapontavam para `/pubg`,
+ofuscando a rota React. Agora esses `.html` são removidos do publish (caem no
+fallback SPA) e o Router redireciona `pubg.html` → `/pubg`.
+
+### 🐛 Correções
+- **deploy:** remove pubg.html/brawlstars.html do publish para não ofuscar as
+  rotas React no GitHub Pages (pretty URL)
+- **routing:** redireciona pubg.html/brawlstars.html → rota limpa no React Router
+
 ## [2.1.0] — 2026-07-23
 
 Primeiro corte de produção da migração para React. As páginas `/brawlstars`
