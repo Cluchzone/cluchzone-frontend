@@ -1,0 +1,921 @@
+.gate {
+  max-width: 480px;
+  margin: 15vh auto 0;
+  padding: 0 24px;
+  text-align: center;
+  color: var(--text-1);
+  font-family: var(--font-ui);
+}
+
+.gateCard {
+  padding: 32px;
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-glow);
+}
+
+.gateIcon {
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.gateCard h1 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.gateCard p {
+  font-size: 13px;
+  color: var(--text-2);
+  margin: 0 0 24px;
+  line-height: 1.5;
+}
+
+.page {
+  color: var(--text-1);
+  font-family: var(--font-ui);
+}
+
+/* ── BANNER ── */
+.banner {
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0f1e 0%, #1a0a2e 30%, #0a1a1e 60%, #0f0a1e 100%);
+}
+
+.bannerGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 100% at 50% 120%, rgba(123, 47, 247, 0.25) 0%, transparent 70%);
+}
+
+.bannerLines {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bannerLines::before,
+.bannerLines::after {
+  content: '';
+  position: absolute;
+  height: 1px;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), transparent);
+}
+
+.bannerLines::before {
+  top: 40%;
+}
+
+.bannerLines::after {
+  top: 70%;
+}
+
+/* ── PROFILE ── */
+.profileSection {
+  background: rgba(10, 13, 22, 0.98);
+  border-bottom: 1px solid var(--border);
+}
+
+.profile {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  position: relative;
+  transform: translateY(-56px);
+  margin-bottom: -56px;
+}
+
+.avatarWrap {
+  width: 112px;
+  height: 112px;
+  border-radius: 16px;
+  border: 4px solid #0a0d16;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border-glow);
+  position: relative;
+  background: #1a2030;
+}
+
+.avatarWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatarFallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  background: linear-gradient(135deg, var(--purple), var(--cyan));
+}
+
+.avatarLevel {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: linear-gradient(135deg, #ffd700, #ff8c00);
+  color: #000;
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 900;
+  padding: 3px 0;
+  letter-spacing: 1px;
+}
+
+.profileInfo {
+  flex: 1;
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
+
+.profileNick {
+  font-family: var(--font-head);
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 1px;
+  text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+}
+
+.profileHandle {
+  font-size: 13px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+.profileTags {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid;
+  letter-spacing: 0.5px;
+}
+
+.tagRank {
+  color: var(--cyan);
+  border-color: var(--border-glow);
+  background: var(--cyan-dim);
+}
+
+.tagTours {
+  color: #c084fc;
+  border-color: rgba(192, 132, 252, 0.35);
+  background: rgba(192, 132, 252, 0.08);
+}
+
+.tagWins {
+  color: var(--green);
+  border-color: rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.08);
+}
+
+.xpBarWrap {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.xpBarTrack {
+  flex: 1;
+  max-width: 260px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.xpBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--purple), var(--cyan));
+  border-radius: 3px;
+}
+
+.xpBarLabel {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* ── STATS STRIP ── */
+.statsStrip {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 32px 20px calc(32px + 112px + 24px);
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.pstatNum {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.pstatLbl {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.cyan {
+  color: var(--cyan) !important;
+}
+.purple {
+  color: #c084fc !important;
+}
+.green {
+  color: var(--green) !important;
+}
+.gold {
+  color: var(--gold) !important;
+}
+
+/* ── TABS ── */
+.tabs {
+  max-width: 1280px;
+  margin: 32px auto 0;
+  padding: 0 32px;
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 10px 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.tabActive {
+  color: var(--cyan);
+  border-bottom-color: var(--cyan);
+}
+
+.tab:hover:not(.tabActive) {
+  color: var(--text-2);
+}
+
+/* ── CONTENT ── */
+.content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.gridWide {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.gridTwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.gridThree {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.column .card,
+.gridWide .card:last-child {
+  margin-bottom: 0;
+}
+
+.cardTitle {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cardTitle::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 14px;
+  background: var(--cyan);
+  border-radius: 2px;
+}
+
+/* ── STEAM INFO ── */
+.steamInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.infoLbl {
+  font-size: 10px;
+  color: var(--text-2);
+  text-transform: uppercase;
+}
+
+.infoVal {
+  font-weight: 700;
+  color: #fff;
+}
+
+.infoValSteam {
+  font: 800 18px var(--font-head);
+  color: #66c0f4;
+}
+
+.steamInfoFooter {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.steamInfoFooter code {
+  font-size: 11px;
+  color: var(--text-2);
+  word-break: break-all;
+}
+
+.steamInfoFooter a {
+  color: #66c0f4;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ── CONNECTED GAMES ── */
+.connectedGames {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.connGame {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 700;
+  color: #cbd5e0;
+}
+
+.linked {
+  border-color: rgba(0, 230, 118, 0.3);
+  color: var(--green);
+  background: rgba(0, 230, 118, 0.06);
+}
+
+.unlinked {
+  color: var(--text-3);
+}
+
+/* ── GAME STAT ROWS ── */
+.gameStatRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.gameStatRow:last-child {
+  border-bottom: none;
+}
+
+.gameStatInfo {
+  flex: 1;
+}
+
+.gameStatName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.gameStatSub {
+  font-size: 11px;
+  color: #718096;
+  margin-top: 1px;
+}
+
+.gameStatSubMuted {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 1px;
+}
+
+.gameStatVals {
+  display: flex;
+  gap: 14px;
+}
+
+.statChip {
+  text-align: center;
+}
+
+.statChipNum {
+  font-family: var(--font-head);
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--cyan);
+}
+
+.statChipLbl {
+  font-size: 9px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── ACHIEVEMENTS ── */
+.achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievement {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 24px;
+}
+
+.achievementGold {
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.achievementCyan {
+  background: var(--cyan-dim);
+  border: 1px solid rgba(0, 212, 255, 0.15);
+}
+
+.achievementPurple {
+  background: var(--purple-dim);
+  border: 1px solid rgba(123, 47, 247, 0.15);
+}
+
+.achievementTitleGold {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.achievementTitleCyan {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--cyan);
+}
+
+.achievementTitlePurple {
+  font-size: 13px;
+  font-weight: 700;
+  color: #c084fc;
+}
+
+.achievementMeta {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* ── RANKING CARD ── */
+.rankingCard {
+  text-align: center;
+  padding: 14px 0;
+}
+
+.rankingIcon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+
+.rankingName {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.rankingSub {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 4px;
+}
+
+.rankingProgress {
+  margin-top: 14px;
+}
+
+.rankingProgressLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-3);
+  margin-bottom: 4px;
+}
+
+.progressTrack {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--purple));
+  border-radius: 3px;
+}
+
+.progressNote {
+  font-size: 10px;
+  color: var(--text-2);
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* ── METRIC LIST (stats tab) ── */
+.metricList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.metricRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.metricLabel {
+  color: var(--text-2);
+}
+
+.metricValue {
+  font-weight: 700;
+  color: #fff;
+}
+
+.chartWrap {
+  position: relative;
+  height: 220px;
+}
+
+/* ── UX KPIs ── */
+.uxKpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.uxKpi {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.uxKpiNum {
+  font-family: var(--font-head);
+  font-size: 22px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.uxKpiLbl {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── HEATMAP ── */
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(52, 1fr);
+  gap: 2px;
+  margin-bottom: 8px;
+}
+
+.hmCell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.l1 {
+  background: rgba(0, 212, 255, 0.2);
+}
+.l2 {
+  background: rgba(0, 212, 255, 0.45);
+}
+.l3 {
+  background: rgba(0, 212, 255, 0.7);
+}
+.l4 {
+  background: rgba(0, 212, 255, 0.95);
+}
+
+.heatmapLegend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: var(--text-3);
+  justify-content: flex-end;
+}
+
+.hmLegendCell {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* ── COMPARISON ── */
+.comparisonRow {
+  margin-bottom: 14px;
+}
+
+.comparisonHead {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 4px;
+  color: var(--text-2);
+}
+
+/* ── HISTORY TABLE ── */
+.histTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.histTable th {
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.histTable td {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.prize {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.histResult {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.win {
+  background: rgba(0, 230, 118, 0.15);
+  color: var(--green);
+  border: 1px solid rgba(0, 230, 118, 0.3);
+}
+
+.top {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border: 1px solid var(--border-glow);
+}
+
+.loss {
+  background: rgba(255, 23, 68, 0.1);
+  color: #ff4444;
+  border: 1px solid rgba(255, 23, 68, 0.2);
+}
+
+/* ── MEDALS ── */
+.medalsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.medalItem {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+}
+
+.medalLocked {
+  opacity: 0.3;
+  filter: grayscale(1);
+}
+
+.medalIcon {
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+
+.medalName {
+  font-size: 10px;
+  font-weight: 700;
+  color: #a0aec0;
+  letter-spacing: 0.5px;
+}
+
+.medalDesc {
+  font-size: 9px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+/* ── CONNECTIONS ── */
+.connectionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.connectionsLead {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.connectionsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.connectionCard {
+  border-left: 4px solid var(--border);
+  padding: 14px 18px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.connectionActive {
+  border-left-color: var(--green);
+}
+
+.connectionLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.connectionIcon {
+  font-size: 28px;
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+}
+
+.connectionDesc {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.connectionStatus {
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.connectionSoon {
+  font-size: 11px;
+  color: var(--text-3);
+  font-weight: 700;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.footerLinkWrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px 48px;
+}
+
+.footerLinkWrap a {
+  color: var(--text-2);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.footerLinkWrap a:hover {
+  color: var(--cyan);
+}
+
+@media (max-width: 900px) {
+  .gridWide,
+  .gridThree,
+  .gridTwo {
+    grid-template-columns: 1fr;
+  }
+  .uxKpiGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .medalsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .profile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .statsStrip {
+    padding-left: 32px;
+  }
+}
