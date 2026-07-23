@@ -64,9 +64,9 @@ docs(governança): adiciona guia de contribuição
 
 ### Escopos aceitos
 
-`design-system`, `auth`, `navbar`, `teams`, `tournaments`, `marketplace`,
-`seller-erp`, `passport`, `chat`, `inventory`, `routing`, `deploy`,
-`governança`, `legacy`, `server`.
+`design-system`, `auth`, `navbar`, `games`, `brawlstars`, `pubg`, `csgo`,
+`teams`, `tournaments`, `marketplace`, `seller-erp`, `passport`, `chat`,
+`inventory`, `routing`, `deploy`, `governança`, `legacy`, `server`.
 
 ### Breaking changes
 

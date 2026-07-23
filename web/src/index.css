@@ -1,7 +1,6 @@
 /*
- * Reset mínimo e neutro. Os design tokens reais (as 22 variáveis de style.css do
- * legado) são portados 1:1 na Fase 1, junto com o design system. Não adicione
- * tokens de cor/tipografia aqui — eles vêm no design-system/.
+ * Reset mínimo. Tokens de cor/tipografia vêm de design-system/tokens.css
+ * (importado em main.tsx) — não redefinir tokens aqui.
  */
 *,
 *::before,
@@ -17,7 +16,9 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-1);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
