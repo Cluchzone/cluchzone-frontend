@@ -28,7 +28,8 @@ O `deploy.yml` monta o diretório `site/` assim:
    como `/cluchzone-frontend/pubg` não é arquivo → o Pages serve `404.html` →
    o React Router (com `basename=/cluchzone-frontend`) renderiza a página.
 4. **Remove** do publish o `.html` de cada página cujo slug colide com a rota
-   React (`pubg.html`, `brawlstars.html`, `marketplace.html`, `seller-erp.html`).
+   React (`pubg.html`, `brawlstars.html`, `marketplace.html`, `seller-erp.html`,
+   `passport.html`).
    Isso é essencial: o Pages resolve `/pubg` para o arquivo `pubg.html` se ele
    existir (pretty URL), o que ofuscaria a rota React e o fallback SPA. Sem o
    arquivo, tanto `/pubg` quanto `/pubg.html` caem no 404 → `404.html` (SPA). A
@@ -56,6 +57,7 @@ servidas byte a byte iguais.
 | `/teams`, `/teams/new` | 6 | `my-teams.html`, `team-create.html` (nomes não colidem com a rota — legado continua publicado, sem conflito de pretty URL) |
 | `/marketplace` | 7 | `marketplace.html` (removido do publish; redireciona) |
 | `/seller-erp` | 7 | `seller-erp.html` (removido do publish; redireciona) |
+| `/passport` | 9 | `passport.html` (removido do publish; redireciona) |
 
 Todo o resto continua servido pelo legado.
 
@@ -68,7 +70,7 @@ reverter é seguro e instantâneo:
   `.github/workflows/deploy.yml` (voltando à versão que só publica o legado).
   O próximo push em `main` republica o site sem o React e com todos os
   `.html` legados originais (`pubg.html`, `brawlstars.html`, `marketplace.html`,
-  `seller-erp.html`).
+  `seller-erp.html`, `passport.html`).
 - **Rollback parcial (mantém o React acessível, mas para de virar usuários):**
   remover só o passo 4 (o `rm` dos `.html`). Os `.html` legados voltam ao publish
   e a navbar legada volta a servi-los; as rotas React só ficam acessíveis por URL

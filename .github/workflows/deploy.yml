@@ -64,13 +64,13 @@ jobs:
           cp web/dist/favicon.svg site/favicon.svg
           cp web/dist/index.html site/404.html
 
-          # 4) Páginas já migradas (Fase 3/4/7): REMOVER os .html legados do publish.
+          # 4) Páginas já migradas (Fase 3/4/7/9): REMOVER os .html legados do publish.
           #    O Pages resolve /pubg para o arquivo pubg.html se ele existir (pretty
           #    URL), ofuscando a rota React e o fallback SPA. Sem o arquivo, tanto
           #    /pubg quanto /pubg.html caem no 404 → 404.html (SPA) → o Router
           #    renderiza (e pubg.html redireciona para /pubg). A navbar legada, que
           #    aponta para esses .html, passa a cair no React. Ver MIGRATION.md.
-          rm -f site/pubg.html site/brawlstars.html site/marketplace.html site/seller-erp.html
+          rm -f site/pubg.html site/brawlstars.html site/marketplace.html site/seller-erp.html site/passport.html
 
           touch site/.nojekyll
 
