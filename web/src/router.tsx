@@ -27,4 +27,13 @@ const routes: RouteObject[] = [
   },
 ]
 
-export const router = createBrowserRouter(routes)
+/**
+ * O basename vem do `base` do Vite (import.meta.env.BASE_URL), fonte única:
+ * - dev/Vercel (preview): base '/'  → basename '/'
+ * - GitHub Pages da org:  base '/cluchzone-frontend/' (via `vite build --base=…`
+ *   no deploy.yml) → basename '/cluchzone-frontend'
+ * Assim as rotas React casam com o subpath do project Pages sem hardcode.
+ */
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+
+export const router = createBrowserRouter(routes, { basename })
