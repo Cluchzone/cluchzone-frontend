@@ -39,9 +39,11 @@ O `deploy.yml` monta o diretório `site/` assim:
    colide com o slug da rota nova (ex.: `my-teams.html` → `/teams`) não
    precisam desse passo — o legado e o React convivem sem conflito de URL.
 
-O `index.html` legado (home) **não** é tocado — continua sendo a home até a
-Fase 10. Todas as demais páginas legadas (`csgo.html`, `teams.html`, etc.) são
-servidas byte a byte iguais.
+A partir da Fase 10, `index.html` (home) segue a mesma regra do passo 4: some
+do publish, e "/" cai no fallback SPA como qualquer outra rota migrada. Todas
+as demais páginas legadas ainda não portadas (`csgo.html`, `organizer-panel.html`,
+`tournament-details.html`, `create-tournament.html`) são servidas byte a byte
+iguais.
 
 > Nota histórica: a v2.1.0 tentou o passo 4 com **stubs de redirect** (arquivos
 > `pubg.html` que redirecionavam para `/pubg`). Isso causou loop infinito, porque
@@ -58,8 +60,11 @@ servidas byte a byte iguais.
 | `/marketplace` | 7 | `marketplace.html` (removido do publish; redireciona) |
 | `/seller-erp` | 7 | `seller-erp.html` (removido do publish; redireciona) |
 | `/passport` | 9 | `passport.html` (removido do publish; redireciona) |
+| `/` | 10 | `index.html` (removido do publish; redireciona) |
 
-Todo o resto continua servido pelo legado.
+O resto (CS2, Organizer/Tournament) continua servido pelo legado — ver
+`SECURITY.md`/memória do projeto para o motivo (backend ainda não endurecido
+para essas áreas).
 
 ## Rollback
 
@@ -70,7 +75,7 @@ reverter é seguro e instantâneo:
   `.github/workflows/deploy.yml` (voltando à versão que só publica o legado).
   O próximo push em `main` republica o site sem o React e com todos os
   `.html` legados originais (`pubg.html`, `brawlstars.html`, `marketplace.html`,
-  `seller-erp.html`, `passport.html`).
+  `seller-erp.html`, `passport.html`, `index.html`).
 - **Rollback parcial (mantém o React acessível, mas para de virar usuários):**
   remover só o passo 4 (o `rm` dos `.html`). Os `.html` legados voltam ao publish
   e a navbar legada volta a servi-los; as rotas React só ficam acessíveis por URL

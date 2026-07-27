@@ -43,6 +43,7 @@ const routes: RouteObject[] = [
       { path: 'marketplace.html', element: <Navigate to="/marketplace" replace /> },
       { path: 'seller-erp.html', element: <Navigate to="/seller-erp" replace /> },
       { path: 'passport.html', element: <Navigate to="/passport" replace /> },
+      { path: 'index.html', element: <Navigate to="/" replace /> },
       // Galeria só em dev (import.meta.env.DEV é false em produção → tree-shaken).
       ...(import.meta.env.DEV ? [{ path: 'dev/gallery', element: <GalleryPage /> }] : []),
       // Rotas ainda não migradas caem no placeholder "Em migração".
