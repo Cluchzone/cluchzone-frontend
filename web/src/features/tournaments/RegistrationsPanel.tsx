@@ -4,16 +4,13 @@ import { useToast } from '@/design-system/Toast'
 import { HttpError } from '@/core/http'
 import type { AuthUser } from '@/features/auth'
 import { teamsService, type TeamView } from '@/features/teams'
+import { registrationIdentity } from './identity'
 import { REGISTRATION_STATUS_LABELS } from './labels'
 import { tournamentsService } from './tournamentsService'
 import type { RegistrationView, TournamentView } from './types'
 import styles from './RegistrationsPanel.module.css'
 
 const CAPTAIN_ROLES = ['CAPTAIN', 'VICE_CAPTAIN'] as const
-
-function shortId(id: string): string {
-  return id.slice(0, 8)
-}
 
 function formatCreatedAt(iso: string): string {
   const date = new Date(iso)
@@ -39,7 +36,8 @@ export function RegistrationsPanel({
 }) {
   const toast = useToast()
   const [registrations, setRegistrations] = useState<RegistrationView[] | null>(null)
-  const [myTeams, setMyTeams] = useState<TeamView[]>([])
+  const [allTeams, setAllTeams] = useState<TeamView[]>([])
+  const [eligibleTeams, setEligibleTeams] = useState<TeamView[]>([])
   const [selectedTeamId, setSelectedTeamId] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [busyId, setBusyId] = useState<string | null>(null)
@@ -68,6 +66,7 @@ export function RegistrationsPanel({
       .listMine()
       .then((teams) => {
         if (ignore) return
+        setAllTeams(teams)
         const eligible = teams.filter((team) =>
           team.members.some(
             (member) =>
@@ -75,7 +74,7 @@ export function RegistrationsPanel({
               (CAPTAIN_ROLES as readonly string[]).includes(member.role),
           ),
         )
-        setMyTeams(eligible)
+        setEligibleTeams(eligible)
         setSelectedTeamId((current) => current || eligible[0]?.id || '')
       })
       .catch(() => {
@@ -85,11 +84,6 @@ export function RegistrationsPanel({
       ignore = true
     }
   }, [tournament.entryKind, currentUser.id])
-
-  function teamName(teamId: string): string {
-    const mine = myTeams.find((team) => team.id === teamId)
-    return mine ? `${mine.name} [${mine.tag}]` : `Equipe #${shortId(teamId)}`
-  }
 
   function upsert(next: RegistrationView) {
     setRegistrations((current) => {
@@ -159,14 +153,14 @@ export function RegistrationsPanel({
       {canRegister && (
         <div className={styles.registerBox}>
           {(tournament.entryKind === 'TEAM' || tournament.entryKind === 'MIXED') &&
-            (myTeams.length > 0 ? (
+            (eligibleTeams.length > 0 ? (
               <div className={styles.registerRow}>
                 <select
                   className={styles.select}
                   value={selectedTeamId}
                   onChange={(event) => setSelectedTeamId(event.target.value)}
                 >
-                  {myTeams.map((team) => (
+                  {eligibleTeams.map((team) => (
                     <option key={team.id} value={team.id}>
                       {team.name} [{team.tag}]
                     </option>
@@ -203,14 +197,7 @@ export function RegistrationsPanel({
         <ul className={styles.list}>
           {registrations.map((registration) => {
             const mine = registration.registeredById === currentUser.id
-            const identity =
-              registration.kind === 'TEAM'
-                ? registration.teamId
-                  ? teamName(registration.teamId)
-                  : `Inscrição #${shortId(registration.id)}`
-                : registration.soloUserId === currentUser.id
-                  ? 'Você'
-                  : `Inscrição #${shortId(registration.id)}`
+            const identity = registrationIdentity(registration, allTeams, currentUser.id)
             return (
               <li key={registration.id} className={styles.item}>
                 <div className={styles.itemTop}>

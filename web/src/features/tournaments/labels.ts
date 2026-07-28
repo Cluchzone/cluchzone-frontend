@@ -1,4 +1,4 @@
-import type { RegistrationStatus, TournamentEntryKind, TournamentStatus } from './types'
+import type { BracketMatchStatus, RegistrationStatus, TournamentEntryKind, TournamentStatus } from './types'
 
 export const STATUS_LABELS: Record<TournamentStatus, string> = {
   DRAFT: 'Rascunho',
@@ -45,4 +45,10 @@ export const REGISTRATION_STATUS_LABELS: Record<RegistrationStatus, string> = {
   APPROVED: 'Aprovada',
   REJECTED: 'Rejeitada',
   WITHDRAWN: 'Retirada',
+}
+
+export const BRACKET_MATCH_STATUS_LABELS: Record<BracketMatchStatus, string> = {
+  PENDING: 'Aguardando definição',
+  READY: 'Pronta',
+  COMPLETED: 'Concluída',
 }
