@@ -1,6 +1,9 @@
 import { apiFetch } from '@/core/http'
 import type {
+  CreateRegistrationInput,
   CreateTournamentInput,
+  RegistrationStatus,
+  RegistrationView,
   TournamentStatus,
   TournamentView,
   UpdateTournamentInput,
@@ -9,13 +12,12 @@ import type {
 const BASE = '/api/tournaments'
 
 /**
- * Cliente fino sobre /api/tournaments. A Fase 8a expõe só o ciclo de vida do
- * torneio: criar (organizer/admin), listar, editar e transicionar status. O
- * backend decide autorização por recurso (ownerId/role) — este cliente não
- * finge nenhuma permissão; só chama e propaga o erro do servidor.
- *
- * Inscrições (register/decide/withdraw) e chaveamento (bracket) existem na API
- * mas entram nas Fases 8b/8c — não adicionar aqui antes.
+ * Cliente fino sobre /api/tournaments. Fase 8a: ciclo de vida do torneio
+ * (criar, listar, editar, status). Fase 8b: inscrições (inscrever, listar,
+ * decidir, desistir). Chaveamento (bracket) existe na API mas entra na Fase
+ * 8c — não adicionar aqui antes. O backend decide autorização por recurso
+ * (ownerId/role/membership de equipe) — este cliente não finge nenhuma
+ * permissão; só chama e propaga o erro do servidor.
  */
 export const tournamentsService = {
   list(): Promise<TournamentView[]> {
@@ -44,5 +46,45 @@ export const tournamentsService = {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ status }),
     }).then((res) => res.tournament)
+  },
+
+  register(
+    tournamentId: string,
+    input: CreateRegistrationInput,
+    idempotencyKey: string,
+  ): Promise<RegistrationView> {
+    return apiFetch<{ ok: boolean; registration: RegistrationView }>(`${BASE}/${tournamentId}/registrations`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'Idempotency-Key': idempotencyKey },
+      body: JSON.stringify(input),
+    }).then((res) => res.registration)
+  },
+
+  listRegistrations(tournamentId: string): Promise<RegistrationView[]> {
+    return apiFetch<{ ok: boolean; registrations: RegistrationView[] }>(
+      `${BASE}/${tournamentId}/registrations`,
+    ).then((res) => res.registrations)
+  },
+
+  decideRegistration(
+    tournamentId: string,
+    registrationId: string,
+    status: Extract<RegistrationStatus, 'APPROVED' | 'REJECTED'>,
+  ): Promise<RegistrationView> {
+    return apiFetch<{ ok: boolean; registration: RegistrationView }>(
+      `${BASE}/${tournamentId}/registrations/${registrationId}/status`,
+      {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ status }),
+      },
+    ).then((res) => res.registration)
+  },
+
+  withdrawRegistration(tournamentId: string, registrationId: string): Promise<RegistrationView> {
+    return apiFetch<{ ok: boolean; registration: RegistrationView }>(
+      `${BASE}/${tournamentId}/registrations/${registrationId}/withdraw`,
+      { method: 'POST' },
+    ).then((res) => res.registration)
   },
 }

@@ -1,4 +1,4 @@
-import type { TournamentEntryKind, TournamentStatus } from './types'
+import type { RegistrationStatus, TournamentEntryKind, TournamentStatus } from './types'
 
 export const STATUS_LABELS: Record<TournamentStatus, string> = {
   DRAFT: 'Rascunho',
@@ -38,4 +38,11 @@ export const TRANSITION_ACTION_LABELS: Record<TournamentStatus, string> = {
   LIVE: 'Iniciar (ao vivo)',
   COMPLETED: 'Concluir',
   CANCELLED: 'Cancelar',
+}
+
+export const REGISTRATION_STATUS_LABELS: Record<RegistrationStatus, string> = {
+  PENDING: 'Pendente',
+  APPROVED: 'Aprovada',
+  REJECTED: 'Rejeitada',
+  WITHDRAWN: 'Retirada',
 }
