@@ -6,6 +6,7 @@ import { useAuth } from '@/features/auth'
 import { HttpError } from '@/core/http'
 import {
   ENTRY_KIND_LABELS,
+  RegistrationsPanel,
   STATUS_LABELS,
   STATUS_TRANSITIONS,
   TRANSITION_ACTION_LABELS,
@@ -85,7 +86,8 @@ function formFromTournament(t: TournamentView): FormState {
  * tem pagamento (SECURITY.md ainda marca pagamentos como não-endurecidos). O
  * gate de UI abaixo é só conveniência — a autorização é sempre do backend.
  *
- * Inscrições e chaveamento (também na API) chegam nas Fases 8b/8c.
+ * Inscrições (Fase 8b) usam o mesmo gate de UI. Chaveamento (bracket) chega
+ * na Fase 8c.
  */
 export function TournamentsPage() {
   const { user, state, login } = useAuth()
@@ -96,6 +98,7 @@ export function TournamentsPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
   const [submitting, setSubmitting] = useState(false)
   const [busyId, setBusyId] = useState<string | null>(null)
+  const [registrationsFor, setRegistrationsFor] = useState<TournamentView | null>(null)
 
   const canCreate = user?.role === 'organizer' || user?.role === 'admin'
 
@@ -283,29 +286,36 @@ export function TournamentsPage() {
                   </div>
                 </dl>
 
-                {operator && (
-                  <div className={styles.actions}>
-                    {(t.status === 'DRAFT' ||
-                      t.status === 'PUBLISHED' ||
-                      t.status === 'REGISTRATION_CLOSED' ||
-                      t.status === 'LIVE') && (
-                      <Button variant="ghost" onClick={() => openEdit(t)} disabled={busyId === t.id}>
-                        ✏️ Editar
-                      </Button>
-                    )}
-                    {transitions.map((next) => (
-                      <Button
-                        key={next}
-                        variant="ghost"
-                        onClick={() => handleTransition(t, next)}
-                        disabled={busyId === t.id}
-                        className={next === 'CANCELLED' ? styles.danger : undefined}
-                      >
-                        {TRANSITION_ACTION_LABELS[next]}
-                      </Button>
-                    ))}
-                  </div>
-                )}
+                <div className={styles.actions}>
+                  {t.status !== 'DRAFT' && (
+                    <Button variant="ghost" onClick={() => setRegistrationsFor(t)}>
+                      👥 Inscrições
+                    </Button>
+                  )}
+                  {operator && (
+                    <>
+                      {(t.status === 'DRAFT' ||
+                        t.status === 'PUBLISHED' ||
+                        t.status === 'REGISTRATION_CLOSED' ||
+                        t.status === 'LIVE') && (
+                        <Button variant="ghost" onClick={() => openEdit(t)} disabled={busyId === t.id}>
+                          ✏️ Editar
+                        </Button>
+                      )}
+                      {transitions.map((next) => (
+                        <Button
+                          key={next}
+                          variant="ghost"
+                          onClick={() => handleTransition(t, next)}
+                          disabled={busyId === t.id}
+                          className={next === 'CANCELLED' ? styles.danger : undefined}
+                        >
+                          {TRANSITION_ACTION_LABELS[next]}
+                        </Button>
+                      ))}
+                    </>
+                  )}
+                </div>
               </li>
             )
           })}
@@ -408,6 +418,21 @@ export function TournamentsPage() {
             {submitting ? 'Salvando…' : editing ? 'Salvar alterações' : 'Criar rascunho'}
           </Button>
         </form>
+      </Modal>
+
+      <Modal
+        open={registrationsFor !== null}
+        onOpenChange={(open) => !open && setRegistrationsFor(null)}
+        title={registrationsFor ? `Inscrições — ${registrationsFor.name}` : 'Inscrições'}
+        wide
+      >
+        {registrationsFor && (
+          <RegistrationsPanel
+            tournament={registrationsFor}
+            currentUser={user}
+            isOperator={isOperator(registrationsFor)}
+          />
+        )}
       </Modal>
     </div>
   )

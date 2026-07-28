@@ -3,8 +3,9 @@
  * invente campos que a API não devolve. As datas (`startsAt`, `createdAt`,
  * `updatedAt`) chegam como string ISO no JSON, não como Date.
  *
- * Fase 8a cobre só o torneio em si (criar/listar/editar/status). Inscrições
- * (RegistrationView) e chaveamento (BracketView) entram nas Fases 8b/8c.
+ * Fase 8a cobriu o torneio em si (criar/listar/editar/status). Fase 8b
+ * adiciona inscrições (RegistrationView). Chaveamento (BracketView) entra na
+ * Fase 8c.
  */
 export type TournamentStatus =
   | 'DRAFT'
@@ -44,3 +45,20 @@ export type UpdateTournamentInput = {
   maxEntries?: number | null
   startsAt?: string | null
 }
+
+export type RegistrationEntryKind = 'TEAM' | 'SOLO'
+export type RegistrationStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'WITHDRAWN'
+
+export type RegistrationView = {
+  id: string
+  tournamentId: string
+  kind: RegistrationEntryKind
+  teamId: string | null
+  soloUserId: string | null
+  registeredById: string
+  status: RegistrationStatus
+  createdAt: string
+  updatedAt: string
+}
+
+export type CreateRegistrationInput = { kind: 'TEAM'; teamId: string } | { kind: 'SOLO' }
