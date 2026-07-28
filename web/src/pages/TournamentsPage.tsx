@@ -5,6 +5,7 @@ import { useToast } from '@/design-system/Toast'
 import { useAuth } from '@/features/auth'
 import { HttpError } from '@/core/http'
 import {
+  BracketPanel,
   ENTRY_KIND_LABELS,
   RegistrationsPanel,
   STATUS_LABELS,
@@ -86,8 +87,7 @@ function formFromTournament(t: TournamentView): FormState {
  * tem pagamento (SECURITY.md ainda marca pagamentos como não-endurecidos). O
  * gate de UI abaixo é só conveniência — a autorização é sempre do backend.
  *
- * Inscrições (Fase 8b) usam o mesmo gate de UI. Chaveamento (bracket) chega
- * na Fase 8c.
+ * Inscrições (Fase 8b) e chaveamento (Fase 8c) usam o mesmo gate de UI.
  */
 export function TournamentsPage() {
   const { user, state, login } = useAuth()
@@ -99,6 +99,7 @@ export function TournamentsPage() {
   const [submitting, setSubmitting] = useState(false)
   const [busyId, setBusyId] = useState<string | null>(null)
   const [registrationsFor, setRegistrationsFor] = useState<TournamentView | null>(null)
+  const [bracketFor, setBracketFor] = useState<TournamentView | null>(null)
 
   const canCreate = user?.role === 'organizer' || user?.role === 'admin'
 
@@ -292,6 +293,11 @@ export function TournamentsPage() {
                       👥 Inscrições
                     </Button>
                   )}
+                  {t.status !== 'DRAFT' && t.status !== 'PUBLISHED' && (
+                    <Button variant="ghost" onClick={() => setBracketFor(t)}>
+                      🗂️ Chaveamento
+                    </Button>
+                  )}
                   {operator && (
                     <>
                       {(t.status === 'DRAFT' ||
@@ -432,6 +438,17 @@ export function TournamentsPage() {
             currentUser={user}
             isOperator={isOperator(registrationsFor)}
           />
+        )}
+      </Modal>
+
+      <Modal
+        open={bracketFor !== null}
+        onOpenChange={(open) => !open && setBracketFor(null)}
+        title={bracketFor ? `Chaveamento — ${bracketFor.name}` : 'Chaveamento'}
+        wide
+      >
+        {bracketFor && (
+          <BracketPanel tournament={bracketFor} currentUser={user} isOperator={isOperator(bracketFor)} />
         )}
       </Modal>
     </div>

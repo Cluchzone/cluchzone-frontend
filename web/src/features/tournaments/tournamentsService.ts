@@ -1,5 +1,6 @@
 import { apiFetch } from '@/core/http'
 import type {
+  BracketView,
   CreateRegistrationInput,
   CreateTournamentInput,
   RegistrationStatus,
@@ -14,10 +15,9 @@ const BASE = '/api/tournaments'
 /**
  * Cliente fino sobre /api/tournaments. Fase 8a: ciclo de vida do torneio
  * (criar, listar, editar, status). Fase 8b: inscrições (inscrever, listar,
- * decidir, desistir). Chaveamento (bracket) existe na API mas entra na Fase
- * 8c — não adicionar aqui antes. O backend decide autorização por recurso
- * (ownerId/role/membership de equipe) — este cliente não finge nenhuma
- * permissão; só chama e propaga o erro do servidor.
+ * decidir, desistir). Fase 8c: chaveamento (gerar, ler). O backend decide
+ * autorização por recurso (ownerId/role/membership de equipe) — este cliente
+ * não finge nenhuma permissão; só chama e propaga o erro do servidor.
  */
 export const tournamentsService = {
   list(): Promise<TournamentView[]> {
@@ -86,5 +86,17 @@ export const tournamentsService = {
       `${BASE}/${tournamentId}/registrations/${registrationId}/withdraw`,
       { method: 'POST' },
     ).then((res) => res.registration)
+  },
+
+  generateBracket(tournamentId: string): Promise<BracketView> {
+    return apiFetch<{ ok: boolean; bracket: BracketView }>(`${BASE}/${tournamentId}/bracket`, {
+      method: 'POST',
+    }).then((res) => res.bracket)
+  },
+
+  getBracket(tournamentId: string): Promise<BracketView> {
+    return apiFetch<{ ok: boolean; bracket: BracketView }>(`${BASE}/${tournamentId}/bracket`).then(
+      (res) => res.bracket,
+    )
   },
 }

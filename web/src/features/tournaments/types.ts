@@ -4,8 +4,10 @@
  * `updatedAt`) chegam como string ISO no JSON, não como Date.
  *
  * Fase 8a cobriu o torneio em si (criar/listar/editar/status). Fase 8b
- * adiciona inscrições (RegistrationView). Chaveamento (BracketView) entra na
- * Fase 8c.
+ * adicionou inscrições (RegistrationView). Fase 8c adiciona chaveamento
+ * (BracketView) — só geração (single-elimination) e leitura; o backend não
+ * tem endpoint para reportar resultado de partida/avançar vencedor além do
+ * que a geração já resolve (byes).
  */
 export type TournamentStatus =
   | 'DRAFT'
@@ -62,3 +64,23 @@ export type RegistrationView = {
 }
 
 export type CreateRegistrationInput = { kind: 'TEAM'; teamId: string } | { kind: 'SOLO' }
+
+export type BracketMatchStatus = 'PENDING' | 'READY' | 'COMPLETED'
+
+export type BracketMatchView = {
+  id: string
+  round: number
+  position: number
+  registrationOneId: string | null
+  registrationTwoId: string | null
+  winnerRegistrationId: string | null
+  status: BracketMatchStatus
+  nextMatchId: string | null
+}
+
+export type BracketView = {
+  id: string
+  tournamentId: string
+  createdAt: string
+  matches: BracketMatchView[]
+}

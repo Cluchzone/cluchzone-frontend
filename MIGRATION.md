@@ -61,19 +61,21 @@ iguais.
 | `/seller-erp` | 7 | `seller-erp.html` (removido do publish; redireciona) |
 | `/passport` | 9 | `passport.html` (removido do publish; redireciona) |
 | `/` | 10 | `index.html` (removido do publish; redireciona) |
-| `/tournaments` | 8a/8b | `organizer-panel.html`, `create-tournament.html` (nome não colide com a rota — legado continua publicado; ainda linkado pelo `csgo.html` legado) |
+| `/tournaments` | 8a/8b/8c | `organizer-panel.html`, `create-tournament.html`, `tournament-details.html` (nomes não colidem com a rota — legado continua publicado; ainda linkado pelo `csgo.html` legado) |
 
 O cluster de torneios foi desbloqueado quando o `clutchzone-backend` (v3.2.0)
 ganhou uma API real endurecida em `/api/tournaments` — com dono (`ownerId`),
 papel (organizer/admin), autorização por recurso, máquina de status,
-inscrições com checagem de capitão e chaveamento. Ele migra em sub-fases, na
-mesma rota `/tournaments`: **8a** (painel do organizador: criar/listar/editar/
-transicionar status), **8b** (esta — inscrições: inscrever/aprovar/rejeitar/
-desistir) e **8c** (chaveamento). O legado guardava tudo num blob global
-`/api/store` sem dono nem autorização e
-embutia um fluxo de pagamento Pix e campos livres de premiação/região/regras —
-**nada disso é portado**: pagamentos seguem "não endurecidos" no `SECURITY.md`,
-e fingir esse estado no cliente é justamente o que a migração elimina.
+inscrições com checagem de capitão e chaveamento. Migrou em sub-fases, todas
+na mesma rota `/tournaments`: **8a** (painel do organizador: criar/listar/
+editar/transicionar status), **8b** (inscrições: inscrever/aprovar/rejeitar/
+desistir) e **8c** (esta — chaveamento: gerar single-elimination e ler; a API
+não tem endpoint para reportar resultado de partida além do que a geração já
+resolve via byes). O legado guardava tudo num blob global `/api/store` sem
+dono nem autorização e embutia um fluxo de pagamento Pix e campos livres de
+premiação/região/regras — **nada disso é portado**: pagamentos seguem "não
+endurecidos" no `SECURITY.md`, e fingir esse estado no cliente é justamente o
+que a migração elimina.
 
 As páginas legadas do cluster (`organizer-panel.html`, `create-tournament.html`,
 `tournament-details.html`) continuam publicadas e servidas para links antigos —
