@@ -1,0 +1,261 @@
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px;
+  font-family: var(--font-ui);
+  color: var(--text-1);
+}
+
+.gate {
+  max-width: 480px;
+  margin: 15vh auto 0;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.gateBadge {
+  display: inline-block;
+  margin: 0 0 20px;
+  padding: 4px 12px;
+  border: 1px solid var(--cyan);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--cyan);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.gateTitle {
+  margin: 0 0 24px;
+  font-size: 28px;
+  line-height: 1.2;
+  font-family: var(--font-head);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-family: var(--font-head);
+  font-size: 30px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.lead {
+  margin: 0;
+  max-width: 620px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.state,
+.empty {
+  text-align: center;
+  color: var(--text-3);
+  padding: 60px 0;
+  font-size: 14px;
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.game {
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border: 1px solid var(--border-glow);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.status {
+  font-family: var(--font-head);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.status[data-status='PUBLISHED'] {
+  color: var(--green);
+  border-color: rgba(0, 255, 136, 0.35);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.status[data-status='LIVE'] {
+  color: var(--pink);
+  border-color: rgba(255, 45, 120, 0.4);
+  background: rgba(255, 45, 120, 0.12);
+}
+
+.status[data-status='REGISTRATION_CLOSED'] {
+  color: var(--orange);
+  border-color: rgba(255, 165, 0, 0.35);
+  background: rgba(255, 165, 0, 0.1);
+}
+
+.status[data-status='COMPLETED'] {
+  color: var(--cyan);
+  border-color: var(--border-glow);
+  background: var(--cyan-dim);
+}
+
+.status[data-status='CANCELLED'] {
+  color: var(--text-3);
+  text-decoration: line-through;
+}
+
+.cardName {
+  margin: 0;
+  font-family: var(--font-head);
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.meta {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.metaRow dt {
+  color: var(--text-3);
+}
+
+.metaRow dd {
+  margin: 0;
+  color: var(--text-1);
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+
+.danger {
+  color: var(--pink);
+  border-color: rgba(255, 45, 120, 0.4);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text-1);
+  font-family: var(--font-ui);
+  font-size: 14px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px var(--cyan-dim);
+}
+
+.input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

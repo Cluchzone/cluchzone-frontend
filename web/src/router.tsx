@@ -8,6 +8,7 @@ import { PubgPage } from '@/pages/PubgPage'
 import { RootLayout } from '@/pages/RootLayout'
 import { SellerErpPage } from '@/pages/SellerErpPage'
 import { TeamCreatePage } from '@/pages/TeamCreatePage'
+import { TournamentsPage } from '@/pages/TournamentsPage'
 import { GalleryPage } from '@/pages/dev/GalleryPage'
 
 /**
@@ -25,6 +26,7 @@ const routes: RouteObject[] = [
       { path: 'pubg', element: <PubgPage /> },
       { path: 'teams', element: <MyTeamsPage /> },
       { path: 'teams/new', element: <TeamCreatePage /> },
+      { path: 'tournaments', element: <TournamentsPage /> },
       { path: 'marketplace', element: <MarketplacePage /> },
       { path: 'seller-erp', element: <SellerErpPage /> },
       {
