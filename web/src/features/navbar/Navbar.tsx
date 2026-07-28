@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { label: 'Brawl Stars', to: '/brawlstars' },
   { label: '🛂 Passaporte', to: '/passport' },
   { label: '👥 Equipes', to: '/teams' },
+  { label: '🏆 Torneios', to: '/tournaments' },
 ]
 
 function Avatar({ url, name }: { url: string | null; name: string }) {
