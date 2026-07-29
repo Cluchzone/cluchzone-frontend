@@ -3,12 +3,12 @@ import styles from './GameSignatureKit.module.css'
 type SignatureSlot = { kind: string; code: string; label: string }
 
 /**
- * 'cs2' entra na Fase 11. No legado, cs2/pubg também hidratam destaques Steam
- * reais (window.ClutchInventory) por cima do fallback estático — isso depende
- * da feature inventory/, ainda não portada, então por ora pubg mostra sempre
+ * No legado, cs2/pubg também hidratam destaques Steam reais
+ * (window.ClutchInventory) por cima do fallback estático — isso depende da
+ * feature inventory/, ainda não portada, então por ora cs2/pubg mostram sempre
  * o kit estático, como o brawl já mostra.
  */
-export type GameKey = 'brawl' | 'pubg'
+export type GameKey = 'brawl' | 'pubg' | 'cs2'
 
 const KITS: Record<GameKey, { eyebrow: string; title: string; note: string; action: string; slots: SignatureSlot[] }> = {
   brawl: {
@@ -35,11 +35,24 @@ const KITS: Record<GameKey, { eyebrow: string; title: string; note: string; acti
       { kind: 'boost', code: '+40', label: 'Boost de energia' },
     ],
   },
+  cs2: {
+    eyebrow: 'MATCH KIT',
+    title: 'PRONTO PARA O CLUTCH',
+    note: 'Plante, retome o site e segure o round decisivo com a equipe em sincronia.',
+    action: 'BUSCAR PARTIDA',
+    slots: [
+      { kind: 'bomb', code: 'C4', label: 'Bomba plantada' },
+      { kind: 'awp', code: 'AWP', label: 'One-tap no mid' },
+      { kind: 'defuse', code: 'KIT', label: 'Kit de defuse' },
+      { kind: 'team', code: '5V5', label: 'Equipe completa' },
+    ],
+  },
 }
 
 const THEME_CLASS: Record<GameKey, string> = {
   brawl: styles.isBrawl,
   pubg: styles.isPubg,
+  cs2: styles.isCs2,
 }
 
 type GameSignatureKitProps = {

@@ -1,5 +1,6 @@
 import { createBrowserRouter, Navigate, type RouteObject } from 'react-router-dom'
 import { BrawlStarsPage } from '@/pages/BrawlStarsPage'
+import { CsgoPage } from '@/pages/CsgoPage'
 import { HomePage } from '@/pages/HomePage'
 import { MarketplacePage } from '@/pages/MarketplacePage'
 import { MyTeamsPage } from '@/pages/MyTeamsPage'
@@ -24,6 +25,7 @@ const routes: RouteObject[] = [
       { index: true, element: <HomePage /> },
       { path: 'brawlstars', element: <BrawlStarsPage /> },
       { path: 'pubg', element: <PubgPage /> },
+      { path: 'csgo', element: <CsgoPage /> },
       { path: 'teams', element: <MyTeamsPage /> },
       { path: 'teams/new', element: <TeamCreatePage /> },
       { path: 'tournaments', element: <TournamentsPage /> },
@@ -41,6 +43,7 @@ const routes: RouteObject[] = [
       // Aqui redirecionamos para a URL limpa da rota React (client-side,
       // sem round-trip no Pages).
       { path: 'pubg.html', element: <Navigate to="/pubg" replace /> },
+      { path: 'csgo.html', element: <Navigate to="/csgo" replace /> },
       { path: 'brawlstars.html', element: <Navigate to="/brawlstars" replace /> },
       { path: 'marketplace.html', element: <Navigate to="/marketplace" replace /> },
       { path: 'seller-erp.html', element: <Navigate to="/seller-erp" replace /> },
