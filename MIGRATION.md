@@ -40,10 +40,10 @@ O `deploy.yml` monta o diretório `site/` assim:
    precisam desse passo — o legado e o React convivem sem conflito de URL.
 
 A partir da Fase 10, `index.html` (home) segue a mesma regra do passo 4: some
-do publish, e "/" cai no fallback SPA como qualquer outra rota migrada. Todas
-as demais páginas legadas ainda não portadas (`csgo.html`, `organizer-panel.html`,
-`tournament-details.html`, `create-tournament.html`) são servidas byte a byte
-iguais.
+do publish, e "/" cai no fallback SPA como qualquer outra rota migrada. As
+demais páginas legadas ainda não cortadas (`csgo.html` — porte em andamento na
+Fase 11, `organizer-panel.html`, `tournament-details.html`,
+`create-tournament.html`) são servidas byte a byte iguais.
 
 > Nota histórica: a v2.1.0 tentou o passo 4 com **stubs de redirect** (arquivos
 > `pubg.html` que redirecionavam para `/pubg`). Isso causou loop infinito, porque
@@ -62,6 +62,7 @@ iguais.
 | `/passport` | 9 | `passport.html` (removido do publish; redireciona) |
 | `/` | 10 | `index.html` (removido do publish; redireciona) |
 | `/tournaments` | 8a/8b/8c | `organizer-panel.html`, `create-tournament.html`, `tournament-details.html` (nomes não colidem com a rota — legado continua publicado; ainda linkado pelo `csgo.html` legado) |
+| `/csgo` | 11a | `csgo.html` (**ainda publicado** — corte do publish só na 11b, quando o Match Center estiver completo; até lá `/csgo` só resolve no React em preview/dev) |
 
 O cluster de torneios foi desbloqueado quando o `clutchzone-backend` (v3.2.0)
 ganhou uma API real endurecida em `/api/tournaments` — com dono (`ownerId`),
@@ -78,9 +79,19 @@ endurecidos" no `SECURITY.md`, e fingir esse estado no cliente é justamente o
 que a migração elimina.
 
 As páginas legadas do cluster (`organizer-panel.html`, `create-tournament.html`,
-`tournament-details.html`) continuam publicadas e servidas para links antigos —
-inclusive os do ainda-legado `csgo.html` (Fase 11) — até o cluster React
-cobri-las por completo e a Fase 11 migrar. CS2 (`csgo.html`) segue no legado.
+`tournament-details.html`) continuam publicadas e servidas para links antigos
+até o cluster React cobri-las por completo.
+
+A **Fase 11** (`csgo.html`) é diferente das outras: a `csgo.html` legada era um
+"kitchen sink" que misturava campeonatos (blob `cluchzone_cs2_camps`), equipes
+(`cluchzone_cs2_teams`) e rankings/feed/notificações 100% fictícios. Campeonatos
+e equipes já foram migrados contra backends endurecidos nas Fases 8
+(`/tournaments`) e 6 (`/teams`), então a rota `/csgo` vira um **hub** que só
+encaminha para eles — não reimplementa o CRUD. Rankings/feed/notifs eram mock
+sem backend e **não são portados**. A peça nova real é o **Match Center**
+(automação de servidor dedicado CS2 contra `/api/matches`, endurecido): sub-fase
+**11a** entrega o hub + atalhos; **11b** entrega o Match Center e faz o corte do
+`csgo.html` do publish (adicionando-o ao `rm` do passo 4 do `deploy.yml`).
 
 ## Rollback
 

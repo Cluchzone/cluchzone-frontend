@@ -1,0 +1,408 @@
+.page {
+  --cs-accent: #ff6b00;
+  --cs-ct: #00d4ff;
+  --cs-dark: #07090e;
+  --cs-border: rgba(255, 255, 255, 0.07);
+
+  position: relative;
+  background-color: var(--cs-dark);
+  color: var(--text-1);
+  font-family: 'Rajdhani', sans-serif;
+  min-height: 100%;
+}
+
+.bgGrid {
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 107, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 107, 0, 0.03) 1px, transparent 1px);
+  background-size: 44px 44px;
+  z-index: -2;
+}
+
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 30px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 40px 0 32px;
+  border-bottom: 1px solid var(--cs-border);
+  margin-bottom: 44px;
+}
+
+.eyebrow {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--cs-accent);
+}
+.eyebrow span:last-child {
+  color: var(--text-3);
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--text-2);
+}
+
+.title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 900;
+  line-height: 1.05;
+  margin: 10px 0 0;
+  color: #fff;
+}
+.title em {
+  font-style: normal;
+  color: var(--cs-accent);
+}
+
+.subtitle {
+  margin: 16px 0 0;
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.heroActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+.quickActions {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.quickActions a {
+  color: var(--cs-ct);
+  text-decoration: none;
+}
+.quickActions a:hover {
+  text-decoration: underline;
+}
+
+.sessionCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+  padding: 12px 16px;
+  border: 1px solid var(--cs-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  max-width: 460px;
+}
+.sessionCard[data-state='authenticated'] {
+  border-color: rgba(0, 255, 136, 0.35);
+}
+.sessionCard[data-state='unavailable'] {
+  border-color: rgba(255, 107, 0, 0.35);
+}
+.sessionIcon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  color: #05070c;
+  background: var(--cs-accent);
+}
+.sessionCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.sessionCopy small {
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  color: var(--text-3);
+}
+.sessionCopy strong {
+  font-size: 14px;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sessionLogin {
+  margin-left: auto;
+  padding: 7px 14px;
+  border: 1px solid var(--cs-ct);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--cs-ct);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.sessionLogin:hover {
+  background: var(--cyan-dim);
+}
+
+/* ── HERO VISUAL (versus card) ────────────────────── */
+.matchVisual {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid var(--cs-border);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(7, 9, 14, 0.9));
+}
+.visualTopline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-3);
+}
+.visualTopline strong {
+  color: var(--green);
+}
+.versusCard {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 10px;
+  align-items: center;
+}
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 8px;
+  border-radius: 10px;
+  text-align: center;
+}
+.side span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+}
+.side small {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--text-3);
+}
+.sideTr {
+  background: rgba(255, 107, 0, 0.08);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+}
+.sideTr span {
+  color: var(--cs-accent);
+}
+.sideCt {
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+}
+.sideCt span {
+  color: var(--cs-ct);
+}
+.versusCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.versusCenter small {
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--text-3);
+}
+.versusCenter strong {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: var(--text-1);
+}
+.versusCenter span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+.matchFlow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.matchFlow div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 8px;
+  border: 1px solid var(--cs-border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
+.matchFlow span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--cs-accent);
+}
+.matchFlow strong {
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--text-1);
+}
+.matchFlow small {
+  font-size: 9px;
+  color: var(--text-3);
+}
+
+/* ── SHORTCUTS ────────────────────────────────────── */
+.shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin-bottom: 44px;
+}
+.shortcutCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px;
+  border: 1px solid var(--cs-border);
+  border-radius: 14px;
+  background: var(--bg-card);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.shortcutCard:hover {
+  border-color: rgba(255, 107, 0, 0.4);
+  transform: translateY(-2px);
+}
+.shortcutIcon {
+  font-size: 26px;
+}
+.shortcutCard strong {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  color: #fff;
+}
+.shortcutCard p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+.shortcutGo {
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cs-accent);
+}
+
+/* ── SIGNATURE KIT ────────────────────────────────── */
+.kitSection {
+  margin-bottom: 44px;
+}
+
+/* ── MATCH CENTER (teaser; 11b entrega funcional) ─── */
+.matchCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--cs-border);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), rgba(7, 9, 14, 0.9));
+}
+.matchCenterKicker {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--cs-ct);
+}
+.matchCenterHead h2 {
+  margin: 8px 0 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+}
+.matchCenterHead p {
+  margin: 0;
+  max-width: 560px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.matchCenterBadge {
+  align-self: center;
+  padding: 8px 14px;
+  border: 1px dashed var(--cs-border);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+/* ── FOOTER ───────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 40px 24px;
+  border-top: 1px solid var(--cs-border);
+}
+.footerLogo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: var(--cs-accent);
+}
+.footer p {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .shortcuts {
+    grid-template-columns: 1fr;
+  }
+  .matchVisual {
+    order: -1;
+  }
+}

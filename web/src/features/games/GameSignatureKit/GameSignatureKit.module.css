@@ -221,6 +221,51 @@
   transform: rotate(8deg);
 }
 
+.isCs2 {
+  --signature-accent: #ff6b00;
+  --signature-accent-rgb: 255, 107, 0;
+  width: min(760px, calc(100% - 32px));
+  margin: 24px auto 0;
+  text-align: left;
+  border-radius: 3px;
+}
+.isCs2 .slot[data-kind='bomb'] .visual::before {
+  content: '';
+  width: 22px;
+  height: 30px;
+  border: 2px solid currentColor;
+  border-radius: 3px;
+  background: linear-gradient(#3a2b1a, #1a130c);
+  box-shadow: 0 0 0 2px rgba(var(--signature-accent-rgb), 0.35), inset 0 6px 0 -3px #ff3b3b;
+}
+.isCs2 .slot[data-kind='awp'] .visual::before {
+  content: '';
+  width: 40px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2a2f26, #454d3d 70%, #20241d);
+  box-shadow: 10px 5px 0 -4px currentColor;
+}
+.isCs2 .slot[data-kind='defuse'] .visual::before {
+  content: '';
+  width: 30px;
+  height: 22px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
+  background: repeating-linear-gradient(90deg, rgba(0, 255, 136, 0.35) 0 4px, transparent 4px 8px);
+  box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.35);
+}
+.isCs2 .slot[data-kind='team'] .visual::before {
+  content: '';
+  width: 30px;
+  height: 30px;
+  border: 2px solid currentColor;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(circle at 50% 32%, currentColor 0 22%, transparent 24%),
+    linear-gradient(rgba(var(--signature-accent-rgb), 0.18), transparent);
+}
+
 @media (max-width: 1180px) {
   .slot {
     grid-template-columns: 42px minmax(0, 1fr);
@@ -235,7 +280,8 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .isBrawl,
-  .isPubg {
+  .isPubg,
+  .isCs2 {
     width: 100%;
   }
 }
