@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/design-system/Button'
 import { useAuth } from '@/features/auth'
 import { GameSignatureKit } from '@/features/games/GameSignatureKit'
+import { MatchCenterPanel } from '@/features/matches'
 import styles from './CsgoPage.module.css'
 
 /**
@@ -16,9 +17,9 @@ import styles from './CsgoPage.module.css'
  * rankings/feed/notifs eram dados fictícios sem backend; não são portados
  * (fingir esse estado no cliente é justamente o que a migração elimina).
  *
- * A peça genuinamente nova da página — o Match Center (automação de servidor
- * dedicado CS2 contra `/api/matches`, endurecido) — entra na Fase 11b; aqui
- * fica só o teaser que a próxima etapa substitui pelo painel funcional.
+ * A peça genuinamente nova da página é o Match Center (Fase 11b): automação de
+ * servidor dedicado CS2 contra `/api/matches` (endurecido), num widget
+ * auto-contido em features/matches/MatchCenterPanel.
  */
 export function CsgoPage() {
   const { user, state, login } = useAuth()
@@ -156,16 +157,8 @@ export function CsgoPage() {
           />
         </section>
 
-        <section ref={matchCenterRef} className={styles.matchCenter} aria-labelledby="cs2-match-center-title">
-          <div className={styles.matchCenterHead}>
-            <span className={styles.matchCenterKicker}>STEAMCMD · DOCKER · RCON</span>
-            <h2 id="cs2-match-center-title">Servidor dedicado automático</h2>
-            <p>
-              Abra uma partida oficial pelo ID para acompanhar o provisionamento, entrar no servidor
-              e controlá-lo via RCON. Conectado ao backend endurecido de partidas.
-            </p>
-          </div>
-          <span className={styles.matchCenterBadge}>Chega na próxima etapa (Fase 11b)</span>
+        <section ref={matchCenterRef} className={styles.matchCenterSection}>
+          <MatchCenterPanel currentUser={user} authState={state} />
         </section>
       </main>
 
