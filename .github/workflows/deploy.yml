@@ -64,7 +64,7 @@ jobs:
           cp web/dist/favicon.svg site/favicon.svg
           cp web/dist/index.html site/404.html
 
-          # 4) Páginas já migradas (Fase 3/4/7/9/10): REMOVER os .html legados do publish.
+          # 4) Páginas já migradas (Fase 3/4/7/9/10/11): REMOVER os .html legados do publish.
           #    O Pages resolve /pubg para o arquivo pubg.html se ele existir (pretty
           #    URL), ofuscando a rota React e o fallback SPA. Sem o arquivo, tanto
           #    /pubg quanto /pubg.html caem no 404 → 404.html (SPA) → o Router
@@ -74,7 +74,10 @@ jobs:
           #    também cai no 404 → 404.html → SPA → rota index (HomePage); e
           #    index.html (link relativo usado pelas páginas legadas ainda não
           #    migradas) redireciona para "/" client-side.
-          rm -f site/pubg.html site/brawlstars.html site/marketplace.html site/seller-erp.html site/passport.html site/index.html
+          #    csgo.html (CS2, Fase 11b): corte feito quando o Match Center React
+          #    passou a cobrir a peça nova da página; campeonatos/equipes já viviam
+          #    em /tournaments e /teams.
+          rm -f site/pubg.html site/brawlstars.html site/marketplace.html site/seller-erp.html site/passport.html site/index.html site/csgo.html
 
           touch site/.nojekyll
 

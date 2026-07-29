@@ -40,9 +40,9 @@ O `deploy.yml` monta o diretório `site/` assim:
    precisam desse passo — o legado e o React convivem sem conflito de URL.
 
 A partir da Fase 10, `index.html` (home) segue a mesma regra do passo 4: some
-do publish, e "/" cai no fallback SPA como qualquer outra rota migrada. As
-demais páginas legadas ainda não cortadas (`csgo.html` — porte em andamento na
-Fase 11, `organizer-panel.html`, `tournament-details.html`,
+do publish, e "/" cai no fallback SPA como qualquer outra rota migrada. A partir
+da Fase 11b, `csgo.html` entra na mesma regra. As demais páginas legadas ainda
+não cortadas (`organizer-panel.html`, `tournament-details.html`,
 `create-tournament.html`) são servidas byte a byte iguais.
 
 > Nota histórica: a v2.1.0 tentou o passo 4 com **stubs de redirect** (arquivos
@@ -62,7 +62,7 @@ Fase 11, `organizer-panel.html`, `tournament-details.html`,
 | `/passport` | 9 | `passport.html` (removido do publish; redireciona) |
 | `/` | 10 | `index.html` (removido do publish; redireciona) |
 | `/tournaments` | 8a/8b/8c | `organizer-panel.html`, `create-tournament.html`, `tournament-details.html` (nomes não colidem com a rota — legado continua publicado; ainda linkado pelo `csgo.html` legado) |
-| `/csgo` | 11a | `csgo.html` (**ainda publicado** — corte do publish só na 11b, quando o Match Center estiver completo; até lá `/csgo` só resolve no React em preview/dev) |
+| `/csgo` | 11a/11b | `csgo.html` (removido do publish; redireciona) |
 
 O cluster de torneios foi desbloqueado quando o `clutchzone-backend` (v3.2.0)
 ganhou uma API real endurecida em `/api/tournaments` — com dono (`ownerId`),
@@ -90,8 +90,12 @@ e equipes já foram migrados contra backends endurecidos nas Fases 8
 encaminha para eles — não reimplementa o CRUD. Rankings/feed/notifs eram mock
 sem backend e **não são portados**. A peça nova real é o **Match Center**
 (automação de servidor dedicado CS2 contra `/api/matches`, endurecido): sub-fase
-**11a** entrega o hub + atalhos; **11b** entrega o Match Center e faz o corte do
-`csgo.html` do publish (adicionando-o ao `rm` do passo 4 do `deploy.yml`).
+**11a** entregou o hub + atalhos; **11b** entregou o Match Center (colar o ID de
+uma partida existente → ler status, check-in, provisionar servidor, sala Steam e
+RCON `PAUSE/UNPAUSE/RESTART/RELEASE`, gated por `canOperate` do backend) e fez o
+corte do `csgo.html` do publish (passo 4 do `deploy.yml`). Criar partida não é
+portável: `POST /api/matches` exige `participants[].userId` e não há lookup de
+usuário por id no backend — mesma parede de identidade da Fase 8.
 
 ## Rollback
 

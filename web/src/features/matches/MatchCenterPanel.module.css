@@ -1,0 +1,255 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid var(--cs-border, rgba(255, 255, 255, 0.07));
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), rgba(7, 9, 14, 0.9));
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.kicker {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--cyan);
+}
+.head h2 {
+  margin: 8px 0 6px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+}
+.desc {
+  margin: 0;
+  max-width: 560px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+/* ── Status badge ─────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  color: var(--text-2);
+}
+.badge i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-3);
+}
+.badge[data-state='busy'] {
+  border-color: rgba(255, 107, 0, 0.4);
+  color: var(--orange);
+}
+.badge[data-state='busy'] i {
+  background: var(--orange);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.badge[data-state='ready'] {
+  border-color: rgba(0, 255, 136, 0.4);
+  color: var(--green);
+}
+.badge[data-state='ready'] i {
+  background: var(--green);
+}
+.badge[data-state='error'] {
+  border-color: rgba(255, 80, 80, 0.5);
+  color: #ff8999;
+}
+.badge[data-state='error'] i {
+  background: #ff5050;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ── Form ─────────────────────────────────────────── */
+.form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.formRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.formRow input {
+  flex: 1;
+  min-width: 220px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-1);
+  font-family: 'JetBrains Mono', 'Rajdhani', monospace;
+  font-size: 13px;
+}
+.formRow input:focus {
+  outline: none;
+  border-color: var(--border-glow);
+}
+.submit {
+  padding: 10px 18px;
+  border: 1px solid var(--cyan);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cyan);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.submit:hover {
+  background: var(--cyan-dim);
+}
+
+/* ── Details ──────────────────────────────────────── */
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+  margin: 0;
+}
+.meta dt {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.meta dd {
+  margin: 4px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-1);
+  word-break: break-word;
+}
+
+.connectBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 14px;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 255, 136, 0.05);
+}
+.connectBox code {
+  flex: 1;
+  min-width: 200px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--green);
+  word-break: break-all;
+}
+.connectBox button {
+  padding: 8px 14px;
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--green);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.connectBox button:hover {
+  background: rgba(0, 255, 136, 0.1);
+}
+
+/* ── Actions (player + RCON) ──────────────────────── */
+.actions,
+.rconActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.actions button,
+.rconActions button {
+  padding: 9px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-1);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+.actions button:hover,
+.rconActions button:hover {
+  border-color: var(--border-glow);
+}
+.rconActions {
+  padding: 14px;
+  border: 1px dashed rgba(255, 107, 0, 0.35);
+  border-radius: 10px;
+  background: rgba(255, 107, 0, 0.03);
+}
+.rconActions span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--orange);
+  width: 100%;
+}
+.rconActions .danger {
+  border-color: rgba(255, 80, 80, 0.5);
+  color: #ff8999;
+}
+.rconActions .danger:hover {
+  border-color: #ff5050;
+  background: rgba(255, 80, 80, 0.08);
+}
+
+/* ── Feedback ─────────────────────────────────────── */
+.feedback {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+.feedback[data-error='true'] {
+  color: #ff8999;
+}
